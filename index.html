@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="public/css/theme.css" rel="stylesheet">
+    <script type="text/javascript" src="public/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="public/lib/bootstrap/dist/js/bootstrap.js"></script>
+  </head>
+
+  <body>
+    <header id="header"></header>
+    <div id="sidebar"></div>
+    <div id="content">
+        <h1>Hola Caracola</h1>
+        <p>Pepe el cañailla</p>
+        test
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      	$.ajax({url: "./templates/header.mst", dataType: 'text'})
+      	.done(function(template, data){
+      		Mustache.parse(template[0]);
+      		var rendered = Mustache.render(template[0], {panels: data[0].panels});
+      		$("#header").html(rendered);
+      	})
+      	.fail(function(){
+      		alert("Error Loading template");
+      	});
+      });
+    </script>
+  </body>
+</html>
